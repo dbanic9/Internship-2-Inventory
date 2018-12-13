@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.106
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryDump2", "InventoryDump2\InventoryDump2.csproj", "{D15C1CA3-720B-4346-93A5-25295BB55964}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D15C1CA3-720B-4346-93A5-25295BB55964}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D15C1CA3-720B-4346-93A5-25295BB55964}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D15C1CA3-720B-4346-93A5-25295BB55964}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D15C1CA3-720B-4346-93A5-25295BB55964}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {85830101-421A-41D8-ABA4-E8F6AA7238F0}
+	EndGlobalSection
+EndGlobal
