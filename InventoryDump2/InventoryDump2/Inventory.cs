@@ -10,11 +10,11 @@ namespace InventoryDump2
         public string Description { get; set; }
         public DateTime DateOfPurchase { get; set; }
         public int WarrantyDuration { get; set; }
-        public decimal Price { get; set; }
+        public int Price { get; set; }
         public Manufacturer Manufacturer { get; set; }
 
         public Inventory(Guid serialNumber, string description, DateTime dateOfPurchase, int warrantyDuration,
-            decimal price, Manufacturer manufacturer)
+            int price, Manufacturer manufacturer)
         {
             SerialNumber = serialNumber;
             Description = description;
@@ -31,7 +31,7 @@ namespace InventoryDump2
         public bool HasBatteries { get; set; }
 
         public Technology(Guid serialNumber, string description, DateTime dateOfPurchase, int warrantyDuration,
-            decimal price, Manufacturer manufacturer, bool hasBatteries)
+            int price, Manufacturer manufacturer, bool hasBatteries)
             : base(serialNumber, description, dateOfPurchase, warrantyDuration, price, manufacturer)
         {
             HasBatteries = hasBatteries;
@@ -44,7 +44,7 @@ namespace InventoryDump2
         public int Mileage { get; set; }
 
         public Vehicle(Guid serialNumber, string description, DateTime dateOfPurchase, int warrantyDuration,
-            decimal price, Manufacturer manufacturer, DateTime registrationExpiryDate, int mileage)
+            int price, Manufacturer manufacturer, DateTime registrationExpiryDate, int mileage)
             : base(serialNumber, description, dateOfPurchase, warrantyDuration, price, manufacturer)
         {
             RegistrationExpiryDate = registrationExpiryDate;
@@ -72,7 +72,7 @@ namespace InventoryDump2
         public bool IsPortable { get; set; }
 
         public Computer(Guid serialNumber, string description, DateTime dateOfPurchase, int warrantyDuration,
-            decimal price, Manufacturer manufacturer, bool hasBatteries, string operatingSystem, bool isPortable)
+            int price, Manufacturer manufacturer, bool hasBatteries, string operatingSystem, bool isPortable)
             : base(serialNumber, description, dateOfPurchase, warrantyDuration, price, manufacturer, hasBatteries)
         {
             OperatingSystem = operatingSystem;
@@ -100,7 +100,7 @@ namespace InventoryDump2
         public string UserID { get; set; }
 
         public CellPhone(Guid serialNumber, string description, DateTime dateOfPurchase, int warrantyDuration,
-            decimal price, Manufacturer manufacturer, bool hasBatteries, string phoneNumber, string userID)
+            int price, Manufacturer manufacturer, bool hasBatteries, string phoneNumber, string userID)
             : base(serialNumber, description, dateOfPurchase, warrantyDuration, price, manufacturer, hasBatteries)
         {
             PhoneNumber = phoneNumber;
