@@ -36,13 +36,17 @@ namespace InventoryDump2
                 new CellPhone(Guid.NewGuid(),"Company cellphone no.5",new DateTime(2018,9,2),36,1.0m,Manufacturer.Huawei,true,"092/222/2222","Maja Majic"){}
             };
 
-            Console.WriteLine("Enter the serial number:");
+            /*Console.WriteLine("Enter the serial number:");
             Guid serNum = Guid.Parse(Console.ReadLine());
             SearchVehicleBySerialNum(companyVehicles,serNum);
             SearchComputerBySerialNum(companyComputers,serNum);
-            SearchPhoneBySerialNum(companyCellPones,serNum);
+            SearchPhoneBySerialNum(companyCellPones,serNum);*/
 
-            
+            Console.WriteLine("Enter a year:");
+            var year = int.Parse(Console.ReadLine());
+            WarrantyCalculator(companyComputers,year);
+
+
 
             /*for (int i = 0; i < companyCellPones.Count; i++)
             {
@@ -82,6 +86,21 @@ namespace InventoryDump2
                 if (PList[i].SerialNumber == serialNumber)
                 {
                     PList[i].PrintCellPhone();
+                }
+            }
+        }
+
+        static void WarrantyCalculator(List<Computer> CList, int year)
+        {
+            for (int i = 0; i < CList.Count; i++)
+            {
+                DateTime date = CList[i].DateOfPurchase;
+                int warranty = CList[i].WarrantyDuration;
+                date=date.AddYears(warranty / 12);
+                if (date.Year == year)
+                {
+                    CList[i].PrintComputer();
+                    Console.WriteLine("\n");
                 }
             }
         }
