@@ -42,9 +42,16 @@ namespace InventoryDump2
             SearchComputerBySerialNum(companyComputers,serNum);
             SearchPhoneBySerialNum(companyCellPones,serNum);*/
 
-            Console.WriteLine("Enter a year:");
-            var year = int.Parse(Console.ReadLine());
-            WarrantyCalculator(companyComputers,year);
+            
+            //WarrantyCalculator(companyComputers);
+
+            //Console.WriteLine("Devices with batteries: " + HaveBatteriesCount(companyCellPones,companyComputers));
+
+            //SearchByBrand(companyCellPones);
+
+            //SearchByOS(companyComputers);
+
+            PhoneWarrantyExpiration(companyCellPones);
 
 
 
@@ -90,16 +97,88 @@ namespace InventoryDump2
             }
         }
 
-        static void WarrantyCalculator(List<Computer> CList, int year)
+        static void WarrantyCalculator(List<Computer> CList)
         {
+            Console.WriteLine("Enter a year:");
+            var year = int.Parse(Console.ReadLine());
             for (int i = 0; i < CList.Count; i++)
             {
-                DateTime date = CList[i].DateOfPurchase;
-                int warranty = CList[i].WarrantyDuration;
+                var date = CList[i].DateOfPurchase;
+                var warranty = CList[i].WarrantyDuration;
                 date=date.AddYears(warranty / 12);
                 if (date.Year == year)
                 {
                     CList[i].PrintComputer();
+                    Console.WriteLine("\n");
+                }
+            }
+        }
+
+        static int HaveBatteriesCount(List<CellPhone> PList, List<Computer> CList)
+        {
+            var counter = 0;
+            for (int i = 0; i < PList.Count; i++)
+            {
+                if (PList[i].HasBatteries == true)
+                {
+                    counter++;
+                }
+            }
+
+            for (int i = 0; i < CList.Count; i++)
+            {
+                if (CList[i].HasBatteries == true)
+                {
+                    counter++;
+                }
+            }
+
+            return counter;
+        }
+
+        static void SearchByBrand(List<CellPhone> PList)
+        {
+            var entry = "";
+            Console.WriteLine("Enter brand name:");
+            entry = Console.ReadLine();
+            for (int i = 0; i < PList.Count; i++)
+            {
+                if (PList[i].Manufacturer.ToString().ToLower()==entry.ToLower())
+                {
+                    PList[i].PrintCellPhone();
+                    Console.WriteLine("\n");
+                }
+            }
+        }
+
+        static void SearchByOS(List<Computer> CList)
+        {
+            Console.WriteLine("Enter an OS:");
+            var entry = Console.ReadLine();
+            for (int i = 0; i < CList.Count; i++)
+            {
+                if (CList[i].OperatingSystem.ToLower().Contains(entry.ToLower()))
+                {
+                    CList[i].PrintComputer();
+                    Console.WriteLine("\n");
+                }
+            }
+        }
+
+        static void PhoneWarrantyExpiration(List<CellPhone> PList)
+        {
+            Console.WriteLine("Enter a year:");
+            var year = int.Parse(Console.ReadLine());
+            for (int i = 0; i < PList.Count; i++)
+            {
+                var date = PList[i].DateOfPurchase;
+                var warranty = PList[i].WarrantyDuration;
+                date = date.AddYears(warranty / 12);
+                if (date.Year == year)
+                {
+                    Console.WriteLine("Phone no." + (i + 1));
+                    Console.WriteLine("Current owner: " + PList[i].UserID);
+                    Console.WriteLine("Phone number: " + PList[i].PhoneNumber);
                     Console.WriteLine("\n");
                 }
             }
