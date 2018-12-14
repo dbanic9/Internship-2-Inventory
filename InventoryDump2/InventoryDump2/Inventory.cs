@@ -6,14 +6,14 @@ namespace InventoryDump2
 {
     public class Inventory
     {
-        public string SerialNumber { get; set; }
+        public Guid SerialNumber { get; set; }
         public string Description { get; set; }
         public DateTime DateOfPurchase { get; set; }
         public int WarrantyDuration { get; set; }
         public decimal Price { get; set; }
         public Manufacturer Manufacturer { get; set; }
 
-        public Inventory(string serialNumber, string description, DateTime dateOfPurchase, int warrantyDuration,
+        public Inventory(Guid serialNumber, string description, DateTime dateOfPurchase, int warrantyDuration,
             decimal price, Manufacturer manufacturer)
         {
             SerialNumber = serialNumber;
@@ -30,7 +30,7 @@ namespace InventoryDump2
     {
         public bool HasBatteries { get; set; }
 
-        public Technology(string serialNumber, string description, DateTime dateOfPurchase, int warrantyDuration,
+        public Technology(Guid serialNumber, string description, DateTime dateOfPurchase, int warrantyDuration,
             decimal price, Manufacturer manufacturer, bool hasBatteries)
             : base(serialNumber, description, dateOfPurchase, warrantyDuration, price, manufacturer)
         {
@@ -43,13 +43,14 @@ namespace InventoryDump2
         public DateTime RegistrationExpiryDate { get; set; }
         public int Mileage { get; set; }
 
-        public Vehicle(string serialNumber, string description, DateTime dateOfPurchase, int warrantyDuration,
+        public Vehicle(Guid serialNumber, string description, DateTime dateOfPurchase, int warrantyDuration,
             decimal price, Manufacturer manufacturer, DateTime registrationExpiryDate, int mileage)
             : base(serialNumber, description, dateOfPurchase, warrantyDuration, price, manufacturer)
         {
             RegistrationExpiryDate = registrationExpiryDate;
             Mileage = mileage;
         }
+
 
         public void PrintVehicle()
         {
@@ -62,6 +63,7 @@ namespace InventoryDump2
             Console.WriteLine("Registration expiry date: " + RegistrationExpiryDate);
             Console.WriteLine("Mileage:" + Mileage);
         }
+
     }
 
     public class Computer : Technology
@@ -69,7 +71,7 @@ namespace InventoryDump2
         public string OperatingSystem { get; set; }
         public bool IsPortable { get; set; }
 
-        public Computer(string serialNumber, string description, DateTime dateOfPurchase, int warrantyDuration,
+        public Computer(Guid serialNumber, string description, DateTime dateOfPurchase, int warrantyDuration,
             decimal price, Manufacturer manufacturer, bool hasBatteries, string operatingSystem, bool isPortable)
             : base(serialNumber, description, dateOfPurchase, warrantyDuration, price, manufacturer, hasBatteries)
         {
@@ -97,7 +99,7 @@ namespace InventoryDump2
         public string PhoneNumber { get; set; }
         public string UserID { get; set; }
 
-        public CellPhone(string serialNumber, string description, DateTime dateOfPurchase, int warrantyDuration,
+        public CellPhone(Guid serialNumber, string description, DateTime dateOfPurchase, int warrantyDuration,
             decimal price, Manufacturer manufacturer, bool hasBatteries, string phoneNumber, string userID)
             : base(serialNumber, description, dateOfPurchase, warrantyDuration, price, manufacturer, hasBatteries)
         {
