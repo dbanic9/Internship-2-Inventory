@@ -11,7 +11,7 @@ namespace InventoryDump2
         {
             var companyVehicles = new List<Vehicle>
             {
-                new Vehicle(Guid.NewGuid(),"Company car no.1",new DateTime(2017, 3, 21),120,21.3m,Manufacturer.Bmw,new DateTime(2019,2,12),21000){},
+                new Vehicle(Guid.NewGuid(),"Company car no.1",new DateTime(2017, 3, 21),120,21.3m,Manufacturer.Bmw,new DateTime(2019,1,12),21000){},
                 new Vehicle(Guid.Parse("b2b8a9f8-f541-4681-9b10-11223531c3ab"),"Company car no.2",new DateTime(2017, 5, 12),120,19.5m,Manufacturer.Toyota,new DateTime(2019,4,19),15000){},
                 new Vehicle(Guid.NewGuid(),"Company car no.3",new DateTime(2017,12, 9),96,16.5m,Manufacturer.Toyota,new DateTime(2019,8,15),10000){},
                 new Vehicle(Guid.NewGuid(),"Company car no.4",new DateTime(2018, 1, 15),180,17.8m,Manufacturer.Hyundai,new DateTime(2019,8,27),7000){},
@@ -51,8 +51,9 @@ namespace InventoryDump2
 
             //SearchByOS(companyComputers);
 
-            PhoneWarrantyExpiration(companyCellPones);
+            //PhoneWarrantyExpiration(companyCellPones);
 
+            VehicleRegistrationExpiry(companyVehicles);
 
 
             /*for (int i = 0; i < companyCellPones.Count; i++)
@@ -179,6 +180,20 @@ namespace InventoryDump2
                     Console.WriteLine("Phone no." + (i + 1));
                     Console.WriteLine("Current owner: " + PList[i].UserID);
                     Console.WriteLine("Phone number: " + PList[i].PhoneNumber);
+                    Console.WriteLine("\n");
+                }
+            }
+        }
+
+        static void VehicleRegistrationExpiry(List<Vehicle> VList)
+        {
+            for (int i = 0; i < VList.Count; i++)
+            {
+                var date = DateTime.Now;
+                var timeSpan = VList[i].RegistrationExpiryDate.Subtract(date);
+                if (timeSpan.TotalDays <= 31)
+                {
+                    VList[i].PrintVehicle();
                     Console.WriteLine("\n");
                 }
             }
