@@ -43,6 +43,38 @@ namespace InventoryDump2
                 Console.WriteLine("----Choose an option from the menu: ");
                 var option = int.Parse(Console.ReadLine());
 
+                if (option == 1)
+                {
+                    Console.WriteLine("Do you want to add a new:");
+                    Console.WriteLine("(1)-Vehicle");
+                    Console.WriteLine("(2)-Computer");
+                    Console.WriteLine("(3)-Cellphone");
+                    option = int.Parse(Console.ReadLine());
+
+                    if (option == 1)
+                    {
+                        AddVehicle(companyVehicles);
+                    }
+
+                    if (option == 2)
+                    {
+                        AddComputer(companyComputers);
+                    }
+
+                    if (option == 3)
+                    {
+                        AddCellPhone(companyCellPones);
+                    }
+
+                    option = 0;
+
+                }
+
+                if (option == 2)
+                {
+                    RemoveInventory(companyVehicles,companyComputers,companyCellPones);
+                }
+
                 if (option == 3)
                 {
                     Console.WriteLine("Enter the serial number:");
@@ -239,6 +271,8 @@ namespace InventoryDump2
         static void Menu()
         {
             Console.WriteLine("|Inventory tracker menu|");
+            Console.WriteLine("(1)-Add inventory");
+            Console.WriteLine("(2)-Remove inventory");
             Console.WriteLine("(3)-Search inventory by serial number");
             Console.WriteLine("(4)-Computer warranty expiration by year");
             Console.WriteLine("(5)-Get number of devices with batteries");
@@ -248,6 +282,180 @@ namespace InventoryDump2
             Console.WriteLine("(9)-Vehicle registrations expiring within the next month");
             Console.WriteLine("(10)-Exit");
             Console.WriteLine("\n");
+        }
+
+        static void AddVehicle(List<Vehicle> VList)
+        {
+            var serialNumber = Guid.NewGuid();
+            Console.WriteLine("Description:");
+            var description = Console.ReadLine();
+            var dateOfPurchase=DateTime.Now;
+            Console.WriteLine("Warranty duration(months):");
+            var warrantyDuration = int.Parse(Console.ReadLine());
+            Console.WriteLine("Initial price:");
+            var price = int.Parse(Console.ReadLine());
+            Console.WriteLine("Manufacturer:");
+            Manufacturer manufacturer;
+            Enum.TryParse(Console.ReadLine(), out manufacturer);
+            Console.WriteLine("Registration expiry year:");
+            var year = int.Parse(Console.ReadLine());
+            Console.WriteLine("Registration expiry month:");
+            var month = int.Parse(Console.ReadLine());
+            Console.WriteLine("Registration expiry day:");
+            var day = int.Parse(Console.ReadLine());
+            var regExpiry=new DateTime(year,month,day);
+            Console.WriteLine("Initial mileage:");
+            var mileage = int.Parse(Console.ReadLine());
+
+            Vehicle newVehicle=new Vehicle(serialNumber,description,dateOfPurchase,warrantyDuration,price,manufacturer,regExpiry,mileage);
+            VList.Add(newVehicle);
+
+            for (int i = 0; i < VList.Count; i++)
+            {
+                VList[i].PrintVehicle();
+                Console.WriteLine("\n");
+            }
+
+        }
+
+        static void AddComputer(List<Computer> CList)
+        {
+            var serialNumber = Guid.NewGuid();
+            Console.WriteLine("Description:");
+            var description = Console.ReadLine();
+            var dateOfPurchase = DateTime.Now;
+            Console.WriteLine("Warranty duration(months):");
+            var warrantyDuration = int.Parse(Console.ReadLine());
+            Console.WriteLine("Initial price:");
+            var price = int.Parse(Console.ReadLine());
+            Console.WriteLine("Manufacturer:");
+            Manufacturer manufacturer;
+            Enum.TryParse(Console.ReadLine(), out manufacturer);
+            Console.WriteLine("This product contains batteries.(True(1)/False(0):");
+            var entry = int.Parse(Console.ReadLine());
+            bool hasBatteries = false;
+            if (entry == 0)
+            {
+                hasBatteries = false;
+            }
+            else if (entry == 1)
+            {
+                hasBatteries = true;
+            }
+            Console.WriteLine("Computer OS:");
+            var opSys = Console.ReadLine();
+            Console.WriteLine("This product is portable.(True(1)/False(0):");
+            entry = int.Parse(Console.ReadLine());
+            bool isPortable = false;
+            if (entry == 0)
+            {
+                isPortable = false;
+            }
+            else if (entry == 1)
+            {
+                isPortable = true;
+            }
+       
+
+            Computer newComp = new Computer(serialNumber, description, dateOfPurchase, warrantyDuration, price, manufacturer, hasBatteries, opSys,isPortable);
+            CList.Add(newComp);
+
+            for (int i = 0; i < CList.Count; i++)
+            {
+                CList[i].PrintComputer();
+                Console.WriteLine("\n");
+            }
+
+        }
+
+        static void AddCellPhone(List<CellPhone> PList)
+        {
+            var serialNumber = Guid.NewGuid();
+            Console.WriteLine("Description:");
+            var description = Console.ReadLine();
+            var dateOfPurchase = DateTime.Now;
+            Console.WriteLine("Warranty duration(months):");
+            var warrantyDuration = int.Parse(Console.ReadLine());
+            Console.WriteLine("Initial price:");
+            var price = int.Parse(Console.ReadLine());
+            Console.WriteLine("Manufacturer:");
+            Manufacturer manufacturer;
+            Enum.TryParse(Console.ReadLine(), out manufacturer);
+            Console.WriteLine("This product contains batteries.(True(1)/False(0):");
+            var entry = int.Parse(Console.ReadLine());
+            bool hasBatteries = false;
+            if (entry == 0)
+            {
+                hasBatteries = false;
+            }
+            else if (entry == 1)
+            {
+                hasBatteries = true;
+            }
+            Console.WriteLine("Phone number:");
+            var phoneNum = Console.ReadLine();
+            Console.WriteLine("User ID:");
+            var userID = Console.ReadLine();
+      
+
+
+            CellPhone newCell = new CellPhone(serialNumber, description, dateOfPurchase, warrantyDuration, price, manufacturer, hasBatteries, phoneNum, userID);
+            PList.Add(newCell);
+
+            for (int i = 0; i < PList.Count; i++)
+            {
+                PList[i].PrintCellPhone();
+                Console.WriteLine("\n");
+            }
+
+        }
+
+        static void RemoveInventory(List<Vehicle> VList,List<Computer> CList,List<CellPhone> PList)
+        {
+            Console.WriteLine("Enter the serial number of a vehicle you want to remove:");
+            var entry = Console.ReadLine();
+
+            //Remove vehicles
+            for (int i = 0; i < VList.Count; i++)
+            {
+                if (VList[i].SerialNumber.ToString() == entry)
+                {
+                    VList.Remove(VList[i]);
+                }
+            }
+            /*for (int i = 0; i < VList.Count; i++)
+            {
+                VList[i].PrintVehicle();
+                Console.WriteLine("\n");
+            }*/
+
+            //Remove computers
+            for (int i = 0; i < CList.Count; i++)
+            {
+                if (CList[i].SerialNumber.ToString() == entry)
+                {
+                    CList.Remove(CList[i]);
+                }
+            }
+            /*for (int i = 0; i < CList.Count; i++)
+            {
+                CList[i].PrintComputer();
+                Console.WriteLine("\n");
+            }*/
+
+            //Remove cellphones
+            for (int i = 0; i < PList.Count; i++)
+            {
+                if (PList[i].SerialNumber.ToString() == entry)
+                {
+                    PList.Remove(PList[i]);
+                }
+            }
+            /*for (int i = 0; i < PList.Count; i++)
+            {
+                PList[i].PrintCellPhone();
+                Console.WriteLine("\n");
+            }*/
         }
 
         
